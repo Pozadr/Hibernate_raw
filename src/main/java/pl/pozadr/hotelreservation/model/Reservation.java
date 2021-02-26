@@ -1,6 +1,7 @@
 package pl.pozadr.hotelreservation.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "reservations")
@@ -9,13 +10,13 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
-    private Guest guest;
+    @OneToMany
+    private List<Guest> guest;
 
     public Reservation() {
     }
 
-    public Reservation(Guest guest) {
+    public Reservation(List<Guest> guest) {
         this.guest = guest;
     }
 
@@ -27,11 +28,11 @@ public class Reservation {
         this.id = id;
     }
 
-    public Guest getGuest() {
+    public List<Guest> getGuests() {
         return guest;
     }
 
-    public void setGuest(Guest guest) {
+    public void setGuests(List<Guest> guest) {
         this.guest = guest;
     }
 

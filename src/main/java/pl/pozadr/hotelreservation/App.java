@@ -8,6 +8,7 @@ import pl.pozadr.hotelreservation.repository.ReservationRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class App {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("thePersistenceUnit");
@@ -18,14 +19,14 @@ public class App {
         ReservationRepository reservationRepository = new ReservationRepository(em);
 
         guestRepository.createGuest("Adam", 90);
-        Guest guest = guestRepository.findById(1L);
-        System.out.println("Find guest by id: " + guest);
-        guestRepository.updateAge(guest, 40);
-        System.out.println("Updated guest: " + guest);
-        // guestRepository.deleteGuest(guest);
+        guestRepository.createGuest("Karol", 70);
+        guestRepository.createGuest("Robert", 40);
 
-        reservationRepository.createReservation(guest);
-        Reservation reservation = reservationRepository.findById(2L);
+        List<Guest> guests = guestRepository.findAll();
+        guests.forEach(System.out::println);
+
+        reservationRepository.createReservation(guests);
+        Reservation reservation = reservationRepository.findById(4L);
         System.out.println("Find reservation by id: " + reservation);
     }
 }
