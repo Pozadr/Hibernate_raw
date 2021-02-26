@@ -25,5 +25,25 @@ public class GuestRepository {
         transaction.commit();
     }
 
+    public Guest findById(long id) {
+        System.out.println("----- FIND BY ID -----");
+        return em.find(Guest.class, id);
+    }
 
+    public void updateAge(Guest guest, int newAge) {
+        System.out.println("----- UPDATE -----");
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        guest.setAge(newAge);
+        transaction.commit();
+    }
+
+
+    public void deleteGuest(Guest guest) {
+        System.out.println("----- DELETE -----");
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.remove(guest);
+        transaction.commit();
+    }
 }
